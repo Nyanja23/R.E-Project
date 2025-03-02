@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://kit.fontawesome.com/ccdd679bcf.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="top-nav">
+        <div class="profile-picture">
+            <img class="img-fluid rounded-circle" src="{{request.user.avatar.url}}" alt="profile-pic" width="1773" height="1773">
+            <p class="lead fw-bold">John Doe</p>
+            <!-- <i class="fa-sharp fa-solid fa-house fa-5x"></i> -->
+        </div>
+        <div class="search-box">
+            <form class="d-flex" method="get" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search for tasks..." aria-label="Search">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="account">
+            <a href="#" class="btn btn-primary">Login|Register</a>
+            <a href="#" class="btn btn-primary">Edit Profile</a>
+        </div>
+    </div>
+    <div id="my-div" class="">
+        <div class="btn-container m-3 bg-dark text-white p-2 rounded">
+            <a href="#" class="btn btn-success btn-lg d-block w-50 mx-auto">+Add Task</a>
+        </div>
+        <hr class="border-3">
+        <div  class="row justify-content-between mx-2">
+            <!-- First Column -->
+            <div class="col-sm-5 bg-primary text-white rounded">
+                <p class="display-4 fw-lighter  text-center text-decoration-underline text-white">Your Tasks</p>
+                <div class="card mt-2 p-3">
+                    <div class="card-body">
+                        <div class="card-title">Task One</div>
+                        <p class="card-text lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <!-- Crud Links -->
+                       <div id="container-fluid">
+                        <a href="#" class="btn btn-outline-warning m-3 m-md-0">Edit Task</a>
+                        <a href="#" class="btn btn-outline-danger m-3 m-md-0">Delete Task</a>
+                       </div>
+                    </div>
+                </div>
+                <div class="card mt-2 p-3">
+                    <div class="card-body">
+                        <div class="card-title">Task One</div>
+                        <p class="card-text lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <!-- Crud Links -->
+                        <div id="container-fluid">
+                            <a href="#" class="btn btn-outline-warning m-3 m-md-0">Edit Task</a>
+                            <a href="#" class="btn btn-outline-danger m-3 m-md-0">Delete Task</a>
+                           </div>
+                    </div>
+                </div>
+                <div class="card mt-2 p-3">
+                    <div class="card-body">
+                        <div class="card-title">Task One</div>
+                        <p class="card-text lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Second Column -->
+            <div class="col-sm-6 bg-primary rounded text-white justify-content-center align-items-center">
+                <p class="display-4 fw-lighter  text-center text-decoration-underline text-white">Your Activity</p>
+
+                    <div class="card mt-2 p-3">
+                        <div class="card-body">
+                            <div class="card-title">Task Two</div>
+                            <div class="row activity">
+                                <div class="col">
+                                    <i class="icon fa-solid fa-square-check fa-2x" style="color: #74C0FC;"></i><span class="mx-2 fw-bold fs-4">Completed</span>
+                                </div>
+                                <div class="col">
+                                    <p class="card-text lead">Marked <span class="fw-bold">"Buy Groceries"</span> as completed| 2hrs ago</p>
+                                </div>
+                            </div>
+                            <div class="row mt-2 align-items-center justify-content-around activity">
+                                <div class="col">
+                                    <i class="fa-solid fa-pen-to-square fa-2x" style="color: #74C0FC;"></i>
+                                    <span class="mx-2 fw-bold fs-4">Edited</span>
+                                </div>
+                                <div class="col">
+                                    <p class="card-text lead">Edited <span class="fw-bold">"Buy Groceries"</span>Today@ 3:30pm</p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <!-- STATISTICS SECTION -->
+                    <div class="card mt-2 p-3">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h1 class=" fw-lighter text-center text-success">Statistics</h1>
+                                <div class="row">
+                                    <div class="col">
+                                        <i class="fa-sharp fa-solid fa-list fa-2x" style="color: #74C0FC;"></i><span class="mx-2 fw-bold fs-4">Total</span>
+                                    </div>
+                                    <div class="col">
+                                        <p class="card-text lead fw-bold">Total Tasks: 8</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <i class="fa-solid fa-check-double fa-2x" style="color: #74C0FC;"></i>
+                                        <span class="mx-2 fw-bold fs-4">Completed</span>
+                                    </div>
+                                    <div class="col">
+                                        <p class="card-text lead fw-bold">Completed Tasks: 2</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <i class="fa-solid fa-spinner fa-2x" style="color: #74C0FC;"></i>
+                                        <span class="mx-2 fw-bold fs-4">Pending</span>
+                                    </div>
+                                    <div class="col">
+                                        <p class="card-text lead fw-bold">Pending Tasks: 6</p>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <!-- DANGER ZONE SECTION -->
+                    <div class="card mt-2 p-3">
+                        <div class="card-body">
+                            <h1 class="fw-lighter text-center text-danger">Danger Zone</h1>
+                            <div class="row">
+                                <div class="col">
+                                    <i class="fa-solid fa-bolt fa-2x" style="color: #f3dc0f;"></i>
+                                    <span class="mx-2 fw-bold fs-4">Next Up</span>
+                                </div>
+                                <div class="col">
+                                    <p class="card-text lead fw-bold text-warning">Tasks Next 24hrs: 4</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <i class="fa-solid fa-skull-crossbones fa-2x" style="color: #d31625;"></i>
+                                    <span class="mx-2 fw-bold fs-4">Overdue</span>
+                                </div>
+                                <div class="col">
+                                    <p class="card-text lead fw-bold text-danger">Tasks Overdue: 3 Tasks</p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+        </div>    
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
