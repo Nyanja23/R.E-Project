@@ -25,8 +25,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'base.apps.BaseConfig'
+    'base.apps.BaseConfig',
+    'crispy_forms',
+    'crispy_bootstrap5'
 ]
+
+CRSIPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK ='bootstrap5'
 
 AUTH_USER_MODEL = 'base.User'
 
@@ -45,7 +50,9 @@ ROOT_URLCONF = 'TaskTracker.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR/'templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

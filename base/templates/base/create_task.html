@@ -1,0 +1,79 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<style>
+    .form-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333; /* Override this if needed */
+}
+
+.form-container .btn-success {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-container .form-group {
+    margin-bottom: 15px;
+}
+
+/* Textarea styles */
+textarea {
+    resize: none;
+    height: 100px;
+    width: 100%;
+}
+
+/* Label styles */
+label {
+    font-size: 1.3rem;
+}
+</style>
+
+<div class="form-container bg-primary">
+    <div class="form-container">
+        <h2 class="text-white text-decoration-underline">Create a New Task</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form.title|as_crispy_field }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.user|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form.description|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form.priority|as_crispy_field }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.due_date|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form.completed|as_crispy_field }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
