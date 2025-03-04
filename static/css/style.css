@@ -1,57 +1,51 @@
+/* Global styles */
 html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden; /* Prevent horizontal scrolling */
-  }
-#my-div{
-    /* height: 100vh; */
-    /* background-color: rgb(214, 211, 211) */
 }
+
+/* Navbar styles */
 .search-box {
     max-width: 500px;
-    /* margin: 20px auto; */
     padding: 10px;
     background-color: #f8f9fa;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .search-box .form-control {
     border-radius: 25px;
     padding: 10px 20px;
     border: 2px solid #ced4da;
     font-size: 1.2rem;
 }
-.top-nav{
+
+.top-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
 }
-.fa-sharp.fa-solid.fa-house.fa-5x{
+
+.fa-sharp.fa-solid.fa-house.fa-5x {
     color: mediumblue;
 }
-@media (max-width:790px) {
-    .top-nav{
+
+@media (max-width: 790px) {
+    .top-nav {
         flex-flow: column wrap;
         gap: 20px;
     }
 }
-#container-fluid{
-    width: 50%;
-    margin: auto;
-}
-.profile-picture img{
+
+.profile-picture img {
     width: 100px;
     height: auto;
 }
-.card-body .activity{
-    
-}
-.overdue{
+
+.overdue {
     color: rgb(219, 18, 18);
 }
-/* @media (max-width:939px) {
-    .card-body .activity{
-        gap: 20px;
-    }
-} */
+
+/* Form container styles */
