@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .models import User,Task,TaskActivity
 from .forms import TaskForm
 from django.contrib.auth import authenticate,login,logout
+from django.contrib import messages
 
 
 
@@ -38,3 +39,39 @@ def edit_task(request,pk):
             form.save()
             return redirect('home')
     return render(request,'base/create_task.html',context)
+
+
+#login page
+def user_login(request):
+    page = 'login'
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username,password=password)
+        try:
+            user = User.objects.get(username=username)
+        except:
+            user = messages.error(request,'User does not exist')
+            
+        if user:
+            login(request,user)
+            return redirect('home')
+    return render(request,'base/login_register.html',{'page':page})
+
+def user_logout(request):
+    logout(request)
+    return redirect('login')
+
+def register(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        try:
+            user = User.objects.create_user(username=username,email=email,password=password)
+            user.save()
+            messages.success(request,'User created successfully')
+            return redirect('login')
+        except:
+            messages.error(request,'An error occured')
+    return render(request,'base/login_register.html')
