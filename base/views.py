@@ -43,6 +43,7 @@ def edit_task(request,pk):
 
 #login page
 def user_login(request):
+    page = 'login'
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -55,4 +56,22 @@ def user_login(request):
         if user:
             login(request,user)
             return redirect('home')
+    return render(request,'base/login_register.html',{'page':page})
+
+def user_logout(request):
+    logout(request)
+    return redirect('login')
+
+def register(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        try:
+            user = User.objects.create_user(username=username,email=email,password=password)
+            user.save()
+            messages.success(request,'User created successfully')
+            return redirect('login')
+        except:
+            messages.error(request,'An error occured')
     return render(request,'base/login_register.html')
