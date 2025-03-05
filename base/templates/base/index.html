@@ -23,6 +23,11 @@
                         <a href="{% url 'edit-task' task.id %}" class="btn btn-outline-warning m-3 m-md-0">Edit Task</a>
                         <a href="{% url 'delete-task' task.id %}" class="btn btn-outline-danger m-3 m-md-0">Delete Task</a>
                        </div>
+                                 <!-- Add the "Mark as Complete" button -->
+                    <form action="{% url 'mark-task-complete' task.id %}" method="POST" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-success m-3 m-md-0">Mark as Complete</button>
+                    </form>
                     </div>
                 </div>
                 {% endfor %}
@@ -31,84 +36,87 @@
             <div class="col-sm-6 bg-primary rounded text-white justify-content-center align-items-center">
                 <p class="display-4 fw-lighter  text-center text-decoration-underline text-white">Your Activity</p>
 
-                    <div class="card mt-2 p-3">
-                        <div class="card-body">
-                            <div class="card-title">Task Two</div>
-                            <div class="row activity">
-                                <div class="col">
-                                    <i class="icon fa-solid fa-square-check fa-2x" style="color: #74C0FC;"></i><span class="mx-2 fw-bold fs-4">Completed</span>
-                                </div>
-                                <div class="col">
-                                    <p class="card-text lead">Marked <span class="fw-bold">"Buy Groceries"</span> as completed| 2hrs ago</p>
-                                </div>
+                {% for activity in activities %}
+                <div class="card mt-2 p-3">
+                    <div class="card-body">
+                        <div class="row activity">
+                            <div class="col">
+                                <!-- Add an icon based on the action -->
+                                {% if activity.action == "Completed" %}
+                                <i class="icon fa-solid fa-square-check fa-2x" style="color: #74C0FC;"></i>
+                                {% elif activity.action == "Updated" %}
+                                <i class="fa-solid fa-pen-to-square fa-2x" style="color: #74C0FC;"></i>
+                                {% elif activity.action == "Created" %}
+                                <i class="fa-solid fa-plus fa-2x" style="color: #74C0FC;"></i>
+                                {% elif activity.action == "Deleted" %}
+                                <i class="fa-solid fa-trash fa-2x" style="color: #74C0FC;"></i>
+                                {% endif %}
+                                <span class="mx-2 fw-bold fs-4">{{ activity.action }}</span>
                             </div>
-                            <div class="row mt-2 align-items-center justify-content-around activity">
-                                <div class="col">
-                                    <i class="fa-solid fa-pen-to-square fa-2x" style="color: #74C0FC;"></i>
-                                    <span class="mx-2 fw-bold fs-4">Edited</span>
-                                </div>
-                                <div class="col">
-                                    <p class="card-text lead">Edited <span class="fw-bold">"Buy Groceries"</span>Today@ 3:30pm</p>
-                                </div>
+                            <div class="col">
+                                <p class="card-text lead">{{ activity.user.name }} {{ activity.action }} "{{ activity.task.title }}" | {{ activity.timestamp|timesince }} ago</p>
                             </div>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
                 <!-- STATISTICS SECTION -->
-                    <div class="card mt-2 p-3">
-                        <div class="card-body">
-                            <div class="text-center">
-                                <h1 class=" fw-lighter text-center text-success">Statistics</h1>
-                                <div class="row">
-                                    <div class="col">
-                                        <i class="fa-sharp fa-solid fa-list fa-2x" style="color: #74C0FC;"></i><span class="mx-2 fw-bold fs-4">Total</span>
-                                    </div>
-                                    <div class="col">
-                                        <p class="card-text lead fw-bold">Total Tasks: 8</p>
-                                    </div>
+                <div class="card mt-2 p-3">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <h1 class="fw-lighter text-center text-success">Statistics</h1>
+                            <div class="row">
+                                <div class="col">
+                                    <i class="fa-sharp fa-solid fa-list fa-2x" style="color: #74C0FC;"></i>
+                                    <span class="mx-2 fw-bold fs-4">Total</span>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <i class="fa-solid fa-check-double fa-2x" style="color: #74C0FC;"></i>
-                                        <span class="mx-2 fw-bold fs-4">Completed</span>
-                                    </div>
-                                    <div class="col">
-                                        <p class="card-text lead fw-bold">Completed Tasks: 2</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <i class="fa-solid fa-spinner fa-2x" style="color: #74C0FC;"></i>
-                                        <span class="mx-2 fw-bold fs-4">Pending</span>
-                                    </div>
-                                    <div class="col">
-                                        <p class="card-text lead fw-bold">Pending Tasks: 6</p>
-                                    </div>
+                                <div class="col">
+                                    <p class="card-text lead fw-bold">Total Tasks: {{ total_tasks }}</p>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col">
+                                    <i class="fa-solid fa-check-double fa-2x" style="color: #74C0FC;"></i>
+                                    <span class="mx-2 fw-bold fs-4">Completed</span>
+                                </div>
+                                <div class="col">
+                                    <p class="card-text lead fw-bold">Completed Tasks: {{ completed_tasks }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <i class="fa-solid fa-spinner fa-2x" style="color: #74C0FC;"></i>
+                                    <span class="mx-2 fw-bold fs-4">Pending</span>
+                                </div>
+                                <div class="col">
+                                    <p class="card-text lead fw-bold">Pending Tasks: {{ pending_tasks }}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- DANGER ZONE SECTION -->
-                    <div class="card mt-2 p-3">
-                        <div class="card-body">
-                            <h1 class="fw-lighter text-center text-danger">Danger Zone</h1>
-                            <div class="row">
-                                <div class="col">
-                                    <i class="fa-solid fa-bolt fa-2x" style="color: #f3dc0f;"></i>
-                                    <span class="mx-2 fw-bold fs-4">Next Up</span>
-                                </div>
-                                <div class="col">
-                                    <p class="card-text lead fw-bold text-warning">Tasks Next 24hrs: 4</p>
-                                </div>
+                <div class="card mt-2 p-3">
+                    <div class="card-body">
+                        <h1 class="fw-lighter text-center text-danger">Danger Zone</h1>
+                        <div class="row">
+                            <div class="col">
+                                <i class="fa-solid fa-bolt fa-2x" style="color: #f3dc0f;"></i>
+                                <span class="mx-2 fw-bold fs-4">Next Up</span>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <i class="fa-solid fa-skull-crossbones fa-2x" style="color: #d31625;"></i>
-                                    <span class="mx-2 fw-bold fs-4">Overdue</span>
-                                </div>
-                                <div class="col">
-                                    <p class="card-text lead fw-bold text-danger">Tasks Overdue: 3 Tasks</p>
-                                </div>
+                            <div class="col">
+                                <p class="card-text lead fw-bold text-warning">Tasks Next 24hrs: {{ next_up_tasks }}</p>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <i class="fa-solid fa-skull-crossbones fa-2x" style="color: #d31625;"></i>
+                                <span class="mx-2 fw-bold fs-4">Overdue</span>
+                            </div>
+                            <div class="col">
+                                <p class="card-text lead fw-bold text-danger">Tasks Overdue: {{ overdue_tasks }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
         </div>    

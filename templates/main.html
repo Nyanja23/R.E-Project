@@ -12,8 +12,8 @@
 <body>
     <div class="top-nav">
         <div class="profile-picture">
-            <img class="img-fluid rounded-circle" src="{{request.user.avatar.url}}" alt="profile-pic" width="1773" height="1773">
             {% if request.user.is_authenticated %}
+            <img class="img-fluid rounded-circle" src="{{request.user.avatar.url}}" alt="profile-pic" width="1773" height="1773">
             <p class="lead fw-bold">Hello {{user.username}}</p>
             {% endif %}
             <!-- <i class="fa-sharp fa-solid fa-house fa-5x"></i> -->
@@ -21,12 +21,15 @@
         <div class="home-link">
             <a class="display-6 link-offset-1-hover" href="/">Home</a>
         </div>
+        <!-- SEARCH BOX -->
         <div class="search-box">
             <form class="d-flex" method="get" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search for tasks..." aria-label="Search">
                 <button class="btn btn-primary" type="submit">Search</button>
             </form>
         </div>
+
+         
         <div class="account">
             
             {% if request.user.is_authenticated %}
