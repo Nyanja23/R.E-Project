@@ -1,6 +1,19 @@
-<form action="" method="post">
-    {% csrf_token %}
-    <p>Are You Sure you want to delete {{task}}</p>
-    <button type="submit">Confirm</button>
-    <a href="{{request.META.HTTP_REFERER}}">Go Back</a>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h5 class="card-title text-center mb-4">Confirm Deletion</h5>
+                        <p class="text-center">Are you sure you want to delete <strong>{{task}}</strong>?</p>
+                        <div class="d-flex justify-content-center gap-3 mt-4">
+                            <button type="submit" class="btn btn-danger">Confirm</button>
+                            <a href="{{request.META.HTTP_REFERER}}" class="btn btn-secondary">Go Back</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

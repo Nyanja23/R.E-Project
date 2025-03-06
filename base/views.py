@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect
 from .models import User,Task,TaskActivity
-from .forms import TaskForm
+from .forms import TaskForm, UserForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -75,3 +76,16 @@ def register(request):
         except:
             messages.error(request,'An error occured')
     return render(request,'base/login_register.html')
+
+@login_required
+def edit_profile_view(request):
+    profile = request.user
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated successfully!')
+            return redirect('home')
+    else:
+        form = UserForm(instance=profile)
+    return render(request, 'edit_profile.html', {'form': form})
