@@ -10,4 +10,5 @@ urlpatterns = [
     path('logout/',views.user_logout,name="logout"),
     path('register/',views.register,name="register"),
     path('edit-profile/', views.edit_profile_view, name='edit-profile'),
+     path('mark-task-complete/<int:pk>/', views.mark_task_complete, name='mark-task-complete')
 ]
