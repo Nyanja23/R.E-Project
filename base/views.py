@@ -22,11 +22,11 @@ def home(request):
     search_query = request.GET.get('q')
     if search_query:
         tasks = tasks.filter(
-            Q(title__icontains=search_query) | #search by title
-            Q(description__icontains=search_query) | #search by description
-            Q(priority__icontains=search_query) | #search by priority
-            Q(due_date__icontains=search_query) | #search by due 
-        )
+        Q(title__icontains=search_query) |  
+        Q(description__icontains=search_query) |  
+        Q(priority__icontains=search_query) |  
+        Q(due_date__date=search_query)  # Use this for filtering by date
+    )
     
 
     # Calculate statistics
