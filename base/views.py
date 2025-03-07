@@ -135,7 +135,7 @@ def register(request):
             messages.success(request,'User created successfully')
             return redirect('login')
         except:
-            messages.error(request,'An error occured')
+            messages.error(request,'An error occurred')
     return render(request,'base/login_register.html')
 
 @login_required
