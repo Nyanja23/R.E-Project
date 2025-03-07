@@ -11,6 +11,7 @@ from datetime import timedelta
 from .forms import UserForm
 
 # import Q for search
+from django.db.models import Q #for search
 
 
 def home(request):
@@ -18,6 +19,14 @@ def home(request):
     activities = TaskActivity.objects.filter(user=request.user).order_by('-timestamp')[:5]
 
     # put the handle search here
+    search_query = request.GET.get('q')
+    if search_query:
+        tasks = tasks.filter(
+            Q(title__icontains=search_query) | #search by title
+            Q(description__icontains=search_query) | #search by description
+            Q(priority__icontains=search_query) | #search by priority
+            Q(due_date__icontains=search_query) | #search by due 
+        )
     
 
     # Calculate statistics
@@ -41,6 +50,8 @@ def home(request):
         "pending_tasks": pending_tasks,
         "next_up_tasks": next_up_tasks,
         "overdue_tasks": overdue_tasks,
+        
+        "search_query": search_query, # Pass the search query to the template
     }
     return render(request, 'base/index.html', context)
 
