@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils import timezone
 from datetime import timedelta
+from .forms import UserForm
 
 # import Q for search
 
@@ -137,7 +138,7 @@ def edit_profile_view(request):
             return redirect('home')
     else:
         form = UserForm(instance=profile)
-    return render(request, 'edit_profile.html', {'form': form})
+    return render(request, 'base/edit_profile.html', {'form': form})
 
 def mark_task_complete(request, pk):
     task = get_object_or_404(Task, id=pk)
