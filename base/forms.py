@@ -10,7 +10,7 @@ class UserForm(ModelForm):
 class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = ['title', 'description', 'priority', 'due_date', 'completed']
         widgets = {
             'due_date':forms.DateInput(attrs={'type':'date'})
         }

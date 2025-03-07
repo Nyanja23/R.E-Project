@@ -13,22 +13,21 @@ from .forms import UserForm
 # import Q for search
 from django.db.models import Q #for search
 
-
+@login_required(login_url="login")
 def home(request):
-    tasks = Task.objects.filter(user=request.user)
-    activities = TaskActivity.objects.filter(user=request.user).order_by('-timestamp')[:5]
-
-    # put the handle search here
+    tasks = Task.objects.filter(user=request.user)  # Filter tasks for the logged-in user
+    activities = TaskActivity.objects.filter(user=request.user).order_by('-timestamp')[:5]  # Get the latest 5 activities
+    
+    # Handle search query
     search_query = request.GET.get('q')
     if search_query:
         tasks = tasks.filter(
-        Q(title__icontains=search_query) |  
-        Q(description__icontains=search_query) |  
-        Q(priority__icontains=search_query) |  
-        Q(due_date__date=search_query)  # Use this for filtering by date
-    )
+            Q(title__icontains=search_query) |  # Search by title
+            Q(description__icontains=search_query) |  # Search by description
+            Q(priority__icontains=search_query) |  # Search by priority
+            Q(due_date__icontains=search_query)  # Search by due date
+        )
     
-
     # Calculate statistics
     total_tasks = tasks.count()
     completed_tasks = tasks.filter(completed=True).count()
@@ -50,13 +49,11 @@ def home(request):
         "pending_tasks": pending_tasks,
         "next_up_tasks": next_up_tasks,
         "overdue_tasks": overdue_tasks,
-        
-        "search_query": search_query, # Pass the search query to the template
+        "search_query": search_query,  # Pass the search query to the template
     }
     return render(request, 'base/index.html', context)
 
 def add_task(request):
-    form = TaskForm()
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
@@ -72,6 +69,9 @@ def add_task(request):
             )
             
             return redirect('home')
+    else:
+        form = TaskForm(initial={'user': request.user})  # Pre-fill the 'user' field
+    
     context = {"form": form}
     return render(request, 'base/create_task.html', context)
 

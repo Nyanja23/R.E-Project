@@ -1,98 +1,76 @@
 {% extends 'main.html' %}
+{% block content %}
 {% load crispy_forms_tags %}
 
-{% block content %}
-<div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10">
-            <div class="card shadow-lg border-0 form-container">
-                <div class="card-header bg-gradient-primary text-white py-4">
-                    <h2 class="h4 mb-0 text-center fw-light">Create a New Task</h2>
-                </div>
-                <div class="card-body p-4">
-                    <form action="" method="post" novalidate>
-                        {% csrf_token %}
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                {{ form.title|as_crispy_field }}
-                            </div>
-                            <div class="col-md-6">
-                                {{ form.user|as_crispy_field }}
-                            </div>
-                            <div class="col-md-12">
-                                {{ form.description|as_crispy_field }}
-                            </div>
-                            <div class="col-md-6">
-                                {{ form.priority|as_crispy_field }}
-                            </div>
-                            <div class="col-md-6">
-                                {{ form.due_date|as_crispy_field }}
-                            </div>
-                            <div class="col-md-12">
-                                {{ form.completed|as_crispy_field }}
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center gap-3 mt-4">
-                            <button type="submit" class="btn btn-success btn-lg px-5 py-2 shadow-sm">
-                                Submit
-                            </button>
-                            <a href="{% url 'add-task' %}" class="btn btn-outline-secondary btn-lg px-5 py-2 shadow-sm">
-                                Cancel
-                            </a>
-                        </div>
-                    </form>
+<style>
+    .form-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 10px;
+        color: #fff;
+    }
+
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333; /* Override this if needed */
+    }
+
+    .form-container .btn-success {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .form-container .form-group {
+        margin-bottom: 15px;
+    }
+
+    /* Textarea styles */
+    textarea {
+        resize: none;
+        height: 100px;
+        width: 100%;
+    }
+
+    /* Label styles */
+    label {
+        font-size: 1.3rem;
+    }
+</style>
+
+<div class="form-container bg-primary">
+    <div class="form-container">
+        <h2 class="text-white text-decoration-underline">Create a New Task</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form.title|as_crispy_field }}
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form.description|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form.priority|as_crispy_field }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.due_date|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form.completed|as_crispy_field }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
     </div>
 </div>
 
-<style>
-    .bg-gradient-primary {
-        background: linear-gradient(45deg, #007bff, #00b4ff);
-    }
-    .form-container {
-        border-radius: 15px;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .form-container:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    }
-    .form-group .control-label {
-        font-size: 1.1rem;
-        font-weight: 500;
-        color: #333;
-    }
-    .form-control {
-        border-radius: 8px;
-        transition: border-color 0.2s ease;
-    }
-    .form-control:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
-    }
-    textarea.form-control {
-        resize: vertical;
-        min-height: 100px;
-        max-height: 200px;
-    }
-    .btn-success, .btn-outline-secondary {
-        border-radius: 8px;
-        transition: all 0.2s ease;
-    }
-    .btn-success:hover {
-        background-color: #218838;
-        transform: scale(1.05);
-    }
-    .btn-outline-secondary:hover {
-        background-color: #6c757d;
-        color: white;
-        transform: scale(1.05);
-    }
-    .help-block {
-        font-size: 0.875rem;
-        color: #6c757d;
-    }
-</style>
 {% endblock %}
