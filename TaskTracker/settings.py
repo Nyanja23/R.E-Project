@@ -127,3 +127,15 @@ MEDIA_ROOT = BASE_DIR/ 'static/images'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 APPEND_SLASH=False
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Directory where static files will be collected
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',  # Optional: If you have a custom static folder
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
