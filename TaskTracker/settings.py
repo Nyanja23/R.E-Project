@@ -14,9 +14,7 @@ SECRET_KEY = 'django-insecure-r%a-%r8i5cg-#dmmfo*f5hzo9wvs#v4sb_m2v$0tvbxui3@^dj
 DEBUG = True
 
 
-# ALLOWED_HOSTS = ['r-e-project.onrender.com', 'localhost', '127.0.0.1']
-ALLOWED_HOSTS = ['*']
-# Application definition
+ALLOWED_HOSTS = ['r-e-project.onrender.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -137,5 +135,3 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
