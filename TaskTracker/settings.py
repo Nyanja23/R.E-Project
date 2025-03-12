@@ -21,10 +21,10 @@ ALLOWED_HOSTS = [
 ]
 # CSRF and session settings
 CSRF_TRUSTED_ORIGINS = ['https://task-tracker-bxwd.onrender.com']
-SECURE_SSL_REDIRECT = True  # Redirect HTTP to HTTPS
+SECURE_SSL_REDIRECT = False  # Redirect HTTP to HTTPS
 SESSION_COOKIE_SECURE = True  # Cookies over HTTPS only
 CSRF_COOKIE_SECURE = True  # CSRF cookie over HTTPS
-
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True  # Optional, forces HTTPS
 
 
