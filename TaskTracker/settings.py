@@ -24,7 +24,8 @@ CSRF_TRUSTED_ORIGINS = ['https://task-tracker-bxwd.onrender.com']
 SECURE_SSL_REDIRECT = True  # Redirect HTTP to HTTPS
 SESSION_COOKIE_SECURE = True  # Cookies over HTTPS only
 CSRF_COOKIE_SECURE = True  # CSRF cookie over HTTPS
-# SECURE_SSL_REDIRECT = True  # Optional, forces HTTPS
+
+SECURE_SSL_REDIRECT = True  # Optional, forces HTTPS
 
 
 # Application definition
@@ -148,5 +149,3 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
