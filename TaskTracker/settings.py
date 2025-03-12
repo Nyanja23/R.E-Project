@@ -19,6 +19,7 @@ ALLOWED_HOSTS = [
     '0.0.0.0',
     'task-tracker-bxwd.onrender.com',  # Your Render URL
 ]
+SECURE_SSL_REDIRECT = True  # Optional, forces HTTPS
 
 
 # Application definition
