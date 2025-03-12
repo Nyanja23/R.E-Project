@@ -11,9 +11,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-r%a-%r8i5cg-#dmmfo*f5hzo9wvs#v4sb_m2v$0tvbxui3@^dj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '0.0.0.0',
+    'task-tracker-bxwd.onrender.com',  # Your Render URL
+]
 
 
 # Application definition
