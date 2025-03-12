@@ -13,8 +13,19 @@ SECRET_KEY = 'django-insecure-r%a-%r8i5cg-#dmmfo*f5hzo9wvs#v4sb_m2v$0tvbxui3@^dj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '0.0.0.0',
+    'task-tracker-bxwd.onrender.com','*.onrender.com'  # Your Render URL
+]
+# CSRF and session settings
+CSRF_TRUSTED_ORIGINS = ['https://task-tracker-bxwd.onrender.com']
+SECURE_SSL_REDIRECT = False  # Redirect HTTP to HTTPS
+SESSION_COOKIE_SECURE = True  # Cookies over HTTPS only
+CSRF_COOKIE_SECURE = True  # CSRF cookie over HTTPS
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-ALLOWED_HOSTS = ['r-e-project.onrender.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -134,4 +145,8 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = '/media/'
+
 MEDIA_ROOT = BASE_DIR / 'media'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
