@@ -27,9 +27,6 @@ CSRF_COOKIE_SECURE = True  # CSRF cookie over HTTPS
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
-
-# Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -148,4 +145,8 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = '/media/'
+
 MEDIA_ROOT = BASE_DIR / 'media'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
