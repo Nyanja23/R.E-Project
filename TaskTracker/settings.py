@@ -17,9 +17,14 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '0.0.0.0',
-    'task-tracker-bxwd.onrender.com',  # Your Render URL
+    'task-tracker-bxwd.onrender.com','*.onrender.com'  # Your Render URL
 ]
-SECURE_SSL_REDIRECT = True  # Optional, forces HTTPS
+# CSRF and session settings
+CSRF_TRUSTED_ORIGINS = ['https://task-tracker-bxwd.onrender.com']
+SECURE_SSL_REDIRECT = True  # Redirect HTTP to HTTPS
+SESSION_COOKIE_SECURE = True  # Cookies over HTTPS only
+CSRF_COOKIE_SECURE = True  # CSRF cookie over HTTPS
+# SECURE_SSL_REDIRECT = True  # Optional, forces HTTPS
 
 
 # Application definition
