@@ -9,7 +9,7 @@ class User(AbstractUser):
     avatar= models.ImageField(null=True,default='default.png')
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
 
 class Task(models.Model):
     title = models.CharField(max_length=200,null=True)
