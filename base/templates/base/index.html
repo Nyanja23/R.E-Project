@@ -35,6 +35,11 @@
                         </div>
                     </div>
                     {% endfor %}
+                    
+                    {% if request.user.task_set.count == 0 %}
+                    <p class="display-6 text-center text-success mt-5">Please Add some Tasks</p>
+        {% endif %}
+
                 </div>
             </div>
         </div>
