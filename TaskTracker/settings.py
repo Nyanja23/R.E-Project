@@ -13,19 +13,39 @@ SECRET_KEY = 'django-insecure-r%a-%r8i5cg-#dmmfo*f5hzo9wvs#v4sb_m2v$0tvbxui3@^dj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+import os
+
+# Debug setting (set this via environment variable on Render)
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '0.0.0.0',
-    'r-e-project.onrender.com','task-tracker-bxwd.onrender.com','https://task-tracker-mit4.onrender.com','*.onrender.com'  # Your Render URL
+    '0.0.0.0',  # For local dev
+    'r-e-project.onrender.com',
+    'task-tracker-bxwd.onrender.com',
+    'task-tracker-mit4.onrender.com',
+    '*.onrender.com',
 ]
-# CSRF and session settings
-CSRF_TRUSTED_ORIGINS = ['https://r-e-project.onrender.com']
-SECURE_SSL_REDIRECT = False  # Redirect HTTP to HTTPS
-SESSION_COOKIE_SECURE = True  # Cookies over HTTPS only
-CSRF_COOKIE_SECURE = True  # CSRF cookie over HTTPS
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://r-e-project.onrender.com',
+    'https://task-tracker-bxwd.onrender.com',
+    'https://task-tracker-mit4.onrender.com',
+    'https://*.onrender.com',
+]
+
+# Security settings based on environment
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+else:
+    SECURE_SSL_REDIRECT = False  # Allow HTTP in development
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SECURE_PROXY_SSL_HEADER = None
 
 INSTALLED_APPS = [
     'django.contrib.admin',
