@@ -17,7 +17,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '0.0.0.0',
-    'r-e-project.onrender.com','*.onrender.com'  # Your Render URL
+    'r-e-project.onrender.com','task-tracker-bxwd.onrender.com','https://task-tracker-mit4.onrender.com','*.onrender.com'  # Your Render URL
 ]
 # CSRF and session settings
 CSRF_TRUSTED_ORIGINS = ['https://r-e-project.onrender.com']
