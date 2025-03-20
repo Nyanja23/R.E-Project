@@ -57,16 +57,49 @@
 {% endif %}
 
     <!-- Messages Section -->
-    {% if messages %}
-        <div class="container mt-3">
-            {% for message in messages %}
-                <div style="color: rgb(235, 7, 7);" class="alert alert-{{message.tags}} alert-dismissible fade show display-6" role="alert">
-                    {{message}}
+    <!-- Messages Section -->
+{% if messages %}
+<div class="container mt-3">
+    {% for message in messages %}
+        {% if message.tags == "success" %}
+            {% with alert_class="alert-success" %}
+                <div class="alert {{ alert_class }} alert-dismissible fade show" role="alert">
+                    {{ message }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            {% endfor %}
-        </div>
-    {% endif %}
+            {% endwith %}
+        {% elif message.tags == "error" %}
+            {% with alert_class="alert-danger" %}
+                <div class="alert {{ alert_class }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endwith %}
+        {% elif message.tags == "warning" %}
+            {% with alert_class="alert-warning" %}
+                <div class="alert {{ alert_class }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endwith %}
+        {% elif message.tags == "info" %}
+            {% with alert_class="alert-info" %}
+                <div class="alert {{ alert_class }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endwith %}
+        {% else %}
+            {% with alert_class="alert-secondary" %}
+                <div class="alert {{ alert_class }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endwith %}
+        {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
 
     <!-- Main Content -->
     <main class="container mt-4">
