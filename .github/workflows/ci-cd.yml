@@ -44,3 +44,15 @@ jobs:
         run: |
           docker build -t petercodes24/task-tracker:latest .
           docker push petercodes24/task-tracker:latest
+      
+      # Deploy to Render (new step)
+      - name: Deploy to Render
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
+        run: |
+          curl -X POST \
+          -H "Authorization: Bearer $RENDER_API_KEY" \
+          -H "Content-Type: application/json" \
+          https://api.render.com/v1/services/$RENDER_SERVICE_ID/deploys
+
