@@ -107,18 +107,23 @@ def edit_task(request, pk):
 def user_login(request):
     page = 'login'
     if request.method == 'POST':
-        username = request.POST.get('username')
+        email = request.POST.get('email') 
         password = request.POST.get('password')
-        user = authenticate(username=username,password=password)
+
         try:
-            user = User.objects.get(username=username)
-        except:
-            user = messages.error(request,'User does not exist')
-            
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            messages.error(request, 'User does not exist')
+            return render(request, 'base/login_register.html', {'page': page})
+
+        user = authenticate(request, email=email, password=password)  
         if user:
-            login(request,user)
+            login(request, user)
             return redirect('home')
-    return render(request,'base/login_register.html',{'page':page})
+        else:
+            messages.error(request, 'Invalid credentials')
+
+    return render(request, 'base/login_register.html', {'page': page})
 
 def user_logout(request):
     logout(request)
