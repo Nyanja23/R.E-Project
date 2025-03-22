@@ -1,0 +1,1 @@
+web: gunicorn TaskTracker.wsgi:application --workers 2
