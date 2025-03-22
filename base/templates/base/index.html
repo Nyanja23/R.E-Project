@@ -9,7 +9,7 @@
     </div>
 
     <!-- Main Content Row -->
-    <div class="row g-4">
+    <div class="row g-4">    
         <!-- Tasks Column -->
         <div class="col-lg-6">
             <div class="card h-100 shadow-sm">
@@ -35,6 +35,11 @@
                         </div>
                     </div>
                     {% endfor %}
+                    
+                    {% if request.user.task_set.count == 0 %}
+                    <p class="display-6 text-center text-success mt-5">Please Add some Tasks</p>
+        {% endif %}
+
                 </div>
             </div>
         </div>

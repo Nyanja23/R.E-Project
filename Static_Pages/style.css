@@ -50,8 +50,14 @@ html, body {
 .overdue{
     color: rgb(219, 18, 18);
 }
-/* @media (max-width:939px) {
-    .card-body .activity{
+
+@media (max-width: 576px) {
+    .top-nav,.account >* {
+        margin-top: 20px;
+    }
+    .account{
+        display: flex;
+        flex-flow: column wrap;
         gap: 20px;
     }
-} */
+}
