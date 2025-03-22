@@ -105,6 +105,8 @@ def edit_task(request, pk):
 
 #login page
 def user_login(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     page = 'login'
     if request.method == 'POST':
         email = request.POST.get('email') 
